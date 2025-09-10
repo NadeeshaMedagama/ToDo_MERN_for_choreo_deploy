@@ -6,7 +6,7 @@ const connectDB = require('./config/database');
 const todoRoutes = require('./routes/todos');
 
 // Load environment variables
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: process.env.NODE_ENV === 'production' ? './config.production.env' : './config.env' });
 
 // Connect to database
 connectDB();
@@ -14,7 +14,12 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(cors());
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN || process.env.NODE_ENV === 'production' ? false : true,
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -47,7 +52,7 @@ app.use('*', (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
