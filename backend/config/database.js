@@ -9,6 +9,14 @@ const connectDB = async () => {
       throw new Error('MONGODB_URI environment variable is not set');
     }
 
+    // Validate MongoDB URI format
+    if (!process.env.MONGODB_URI.startsWith('mongodb://') && !process.env.MONGODB_URI.startsWith('mongodb+srv://')) {
+      console.error('❌ Invalid MongoDB URI format:');
+      console.error('   Current value:', process.env.MONGODB_URI);
+      console.error('   Expected format: mongodb://... or mongodb+srv://...');
+      throw new Error('Invalid MongoDB URI format. Must start with "mongodb://" or "mongodb+srv://"');
+    }
+
     const conn = await mongoose.connect(process.env.MONGODB_URI, {
       serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
       socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
