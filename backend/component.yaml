@@ -1,35 +1,12 @@
-apiVersion: choreo.dev/v1alpha1
-kind: Component
-metadata:
-  name: todo-backend
-  description: "Backend service for MERN Todo Application - Choreo Deployment"
-spec:
-  type: service
-  build:
-    type: dockerfile
-    context: .
-    dockerfile: Dockerfile
-    buildpack: false
-  # Endpoints are now configured in .choreo/endpoints.yaml
-  runtime:
-    env:
-      - name: NODE_ENV
-        value: production
-      - name: PORT
-        value: "8080"
-      - name: CORS_ORIGIN
-        value: "*"
-    resources:
-      limits:
-        memory: "512Mi"
-        cpu: "500m"
-      requests:
-        memory: "256Mi"
-        cpu: "250m"
-  observability:
-    metrics:
-      enabled: true
-    tracing:
-      enabled: true
-    logging:
-      level: info
+schemaVersion: "1.2"
+endpoints:
+    - name: todo-api-5c6
+      displayName: Todo API
+      service:
+        basePath: /
+        port: 8080
+      type: REST
+      networkVisibilities:
+        - Project
+        - Public
+      schemaFilePath: openapi.yaml
