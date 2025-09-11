@@ -11,5 +11,6 @@ spec:
   endpoints:
     - name: api
       port: 8080
-      path: /
-      protocol: http
+      type: REST
+      networkVisibility: Public
+      context: /
