@@ -1,0 +1,6 @@
+[build]
+builder = "dockerfile"
+
+[[build.env]]
+name = "GOOGLE_NODEJS_VERSION"
+value = "18"

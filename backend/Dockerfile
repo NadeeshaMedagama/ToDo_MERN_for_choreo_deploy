@@ -1,5 +1,5 @@
-# Use Node.js 18 LTS
-FROM node:18-alpine
+# Use Node.js 18 LTS explicitly
+FROM node:18.20.8-alpine
 
 # Set working directory
 WORKDIR /usr/src/app
