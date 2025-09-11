@@ -271,6 +271,7 @@ components:
           format: date-time
           description: When the todo was last updated
       required:
+        - _id
         - text
         - completed
     CreateTodoRequest:
