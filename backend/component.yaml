@@ -8,3 +8,9 @@ spec:
   build:
     context: .
     dockerfile: Dockerfile
+  endpoints:
+    - name: api
+      port: 8080
+      type: REST
+      networkVisibility: Public
+      context: /
