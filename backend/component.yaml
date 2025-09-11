@@ -5,8 +5,10 @@ metadata:
 spec:
   type: service
   build:
+    type: dockerfile
     context: .
     dockerfile: Dockerfile
+    buildpack: false
   endpoints:
     - name: api
       port: 8080
