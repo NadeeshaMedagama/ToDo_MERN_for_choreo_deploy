@@ -6,6 +6,7 @@ spec:
   type: service
   runtime: nodejs18
   build:
+    type: dockerfile
     context: .
     dockerfile: Dockerfile
   endpoints:
