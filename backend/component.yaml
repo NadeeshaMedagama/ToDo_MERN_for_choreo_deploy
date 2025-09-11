@@ -10,20 +10,7 @@ spec:
     context: .
     dockerfile: Dockerfile
     buildpack: false
-  endpoints:
-    - name: api
-      port: 8080
-      type: REST
-      networkVisibility: Public
-      context: /
-      healthCheck:
-        path: /api/health
-        port: 8080
-        initialDelaySeconds: 30
-        periodSeconds: 10
-        timeoutSeconds: 5
-        failureThreshold: 3
-        successThreshold: 1
+  # Endpoints are now configured in .choreo/endpoints.yaml
   runtime:
     env:
       - name: NODE_ENV
