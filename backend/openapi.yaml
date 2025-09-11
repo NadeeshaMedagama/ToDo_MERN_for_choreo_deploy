@@ -248,27 +248,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /health:
-    get:
-      summary: Health check
-      description: Check if the service is running
-      tags:
-        - Health
-      responses:
-        '200':
-          description: Service is healthy
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  message:
-                    type: string
-                  timestamp:
-                    type: string
-                    format: date-time
 components:
   schemas:
     Todo:
