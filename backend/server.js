@@ -15,7 +15,7 @@ const app = express();
 
 // Middleware
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN || process.env.NODE_ENV === 'production' ? false : true,
+  origin: process.env.NODE_ENV === 'production' ? false : true,
   credentials: true,
   optionsSuccessStatus: 200
 };
