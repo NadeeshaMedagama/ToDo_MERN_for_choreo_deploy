@@ -1,12 +1,8 @@
-schemaVersion: "1.2"
+version: 0.1
 endpoints:
-    - name: todo-api-5c6
-      displayName: Todo API
-      service:
-        basePath: /
-        port: 8080
-      type: REST
-      networkVisibilities:
-        - Project
-        - Public
-      schemaFilePath: openapi.yaml
+  - name: todo-api-5c6
+    port: 8080
+    type: REST
+    context: /
+    networkVisibility: Public
+    schemaFilePath: openapi.yaml
