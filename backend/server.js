@@ -5,10 +5,21 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/database');
 const todoRoutes = require('./routes/todos');
 
+console.log('🚀 Starting Todo Backend Service...');
+console.log('📋 Environment:', process.env.NODE_ENV || 'development');
+
 // Load environment variables
-dotenv.config({ path: process.env.NODE_ENV === 'production' ? './config.production.env' : './config.env' });
+const envFile = process.env.NODE_ENV === 'production' ? './config.production.env' : './config.env';
+console.log('📁 Loading environment from:', envFile);
+dotenv.config({ path: envFile });
+
+console.log('🔧 Environment variables loaded:');
+console.log('  - PORT:', process.env.PORT);
+console.log('  - NODE_ENV:', process.env.NODE_ENV);
+console.log('  - MONGODB_URI:', process.env.MONGODB_URI ? 'Set' : 'Not set');
 
 // Connect to database
+console.log('🔌 Connecting to database...');
 connectDB();
 
 const app = express();
@@ -52,12 +63,15 @@ app.use('*', (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 
 // Only start server if not in test environment
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log('✅ Server successfully started!');
+    console.log(`🌐 Server running on port ${PORT}`);
+    console.log(`🔗 Health check available at: http://localhost:${PORT}/api/health`);
+    console.log(`📡 API endpoints available at: http://localhost:${PORT}/api/todos`);
   });
 }
 
