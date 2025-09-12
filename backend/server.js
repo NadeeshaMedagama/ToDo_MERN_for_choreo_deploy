@@ -26,7 +26,9 @@ const app = express();
 
 // Middleware
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production' ? false : true,
+  origin: process.env.NODE_ENV === 'production'
+    ? ['https://todo-frontend.choreo.dev', 'https://todo-backend.choreo.dev']
+    : '*',
   credentials: true,
   optionsSuccessStatus: 200
 };
@@ -75,5 +77,4 @@ if (process.env.NODE_ENV !== 'test') {
   });
 }
 
-// Export app for testing
 module.exports = app;
