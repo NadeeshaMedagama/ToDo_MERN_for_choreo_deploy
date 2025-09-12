@@ -9,7 +9,14 @@ console.log('🚀 Starting Todo Backend Service...');
 console.log('📋 Environment:', process.env.NODE_ENV || 'development');
 
 // Load environment variables
-const envFile = process.env.NODE_ENV === 'production' ? './config.production.env' : './config.env';
+let envFile;
+if (process.env.NODE_ENV === 'production') {
+  envFile = './config.production.env';
+} else if (process.env.NODE_ENV === 'test') {
+  envFile = './config.test.env';
+} else {
+  envFile = './config.env';
+}
 console.log('📁 Loading environment from:', envFile);
 dotenv.config({ path: envFile });
 

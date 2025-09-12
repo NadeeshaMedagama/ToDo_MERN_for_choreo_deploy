@@ -1,4 +1,23 @@
 const request = require('supertest');
+
+// Mock the database connection before importing the server
+jest.mock('../config/database', () => ({
+  connectDB: jest.fn(() => Promise.resolve())
+}));
+
+// Mock mongoose
+jest.mock('mongoose', () => ({
+  connect: jest.fn(() => Promise.resolve({
+    connection: {
+      host: 'localhost',
+      name: 'test-db'
+    }
+  })),
+  connection: {
+    on: jest.fn()
+  }
+}));
+
 const app = require('../server');
 
 describe('Todo API Tests', () => {
