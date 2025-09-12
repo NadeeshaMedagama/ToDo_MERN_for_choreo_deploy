@@ -10,7 +10,7 @@ endpoints:
     networkVisibilities: 
       - Public
       - Organization
-    schemaFilePath: /.chreo/openapi.yaml
+    schemaFilePath: .choreo/openapi.yaml
 
 dependencies:
   connectionReferences:
