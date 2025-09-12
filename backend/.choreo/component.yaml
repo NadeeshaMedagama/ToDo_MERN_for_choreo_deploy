@@ -1,21 +1,16 @@
 schemaVersion: 1.2
 
 endpoints:
-  - name: todo-api-5c6
+  - name: todo-api
     displayName: Todo API
     service:
       basePath: /
       port: 8080
     type: REST
-    networkVisibilities: 
+    networkVisibilities:
       - Public
       - Organization
     schemaFilePath: .choreo/openapi.yaml
-
-dependencies:
-  connectionReferences:
-    - name: mongodb-connection
-      resourceRef: service:/DatabaseProject/MongoDBComponent/v1/latest/PUBLIC
 
 configurations:
   env:
@@ -25,36 +20,24 @@ configurations:
           displayName: MongoDB Connection String
           required: true
           type: secret
+
     - name: NODE_ENV
       valueFrom:
         configForm:
           displayName: Node Environment
           required: true
           type: string
+
     - name: PORT
       valueFrom:
         configForm:
           displayName: Server Port
           required: true
           type: number
+
     - name: CORS_ORIGIN
       valueFrom:
         configForm:
           displayName: CORS Origin
           required: false
           type: string
-  file:
-    - name: config.yaml
-      mountPath: /usr/src/app/config
-      type: yaml
-      values:
-        - name: app_name
-          valueFrom:
-            configForm:
-              displayName: Application Name
-              type: string
-        - name: log_level
-          valueFrom:
-            configForm:
-              displayName: Log Level
-              type: string
