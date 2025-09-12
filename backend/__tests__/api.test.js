@@ -15,7 +15,40 @@ jest.mock('mongoose', () => ({
   })),
   connection: {
     on: jest.fn()
-  }
+  },
+  Schema: jest.fn().mockImplementation(() => ({
+    methods: {},
+    statics: {},
+    pre: jest.fn(),
+    post: jest.fn()
+  })),
+  model: jest.fn().mockReturnValue({
+    find: jest.fn().mockReturnValue({
+      sort: jest.fn().mockResolvedValue([])
+    }),
+    findById: jest.fn().mockResolvedValue(null),
+    findByIdAndUpdate: jest.fn().mockResolvedValue(null),
+    findByIdAndDelete: jest.fn().mockResolvedValue(null),
+    create: jest.fn().mockResolvedValue({}),
+    save: jest.fn().mockResolvedValue({})
+  })
+}));
+
+// Mock Todo model
+jest.mock('../models/Todo', () => ({
+  find: jest.fn().mockReturnValue({
+    sort: jest.fn().mockResolvedValue([])
+  }),
+  findById: jest.fn().mockResolvedValue(null),
+  findByIdAndUpdate: jest.fn().mockResolvedValue(null),
+  findByIdAndDelete: jest.fn().mockResolvedValue(null),
+  create: jest.fn().mockResolvedValue({
+    _id: '507f1f77bcf86cd799439011',
+    title: 'Test Todo',
+    description: 'Test Description',
+    completed: false,
+    priority: 'medium'
+  })
 }));
 
 const app = require('../server');
