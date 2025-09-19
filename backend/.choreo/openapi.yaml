@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: RESTful API for managing todos in a MERN stack application
 servers:
-  - url: https://todo-backend.choreo.dev
+  - url: https://bfdef01f-7fc1-46ea-af69-42279e15f710-dev-internal.e1-us-east-azure.internal.choreoapis.dev/to-do-application-server/backend/v1
     description: Production server
   - url: http://localhost:8080
     description: Local development server
