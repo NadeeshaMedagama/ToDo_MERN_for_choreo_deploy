@@ -1,7 +1,13 @@
-window.config = {
-    apiUrl: 'https://bfdef01f-7fc1-46ea-af69-42279e15f710-dev-internal.e1-us-east-azure.internal.choreoapis.dev/to-do-application-server/backend/v1',
+// Configuration for both local development and Choreo deployment
+window.configs = {
+    // For Choreo deployment, this will be overridden by environment variables
+    // For local development, this provides the fallback URL
+    apiUrl: process.env.REACT_APP_API_URL || 'http://localhost:5000',
+    tokenUrl: process.env.REACT_APP_TOKEN_URL || 'http://localhost:5000/oauth2/token',
+    consumerKey: process.env.REACT_APP_CONSUMER_KEY || 'your-consumer-key',
+    consumerSecret: process.env.REACT_APP_CONSUMER_SECRET || 'your-consumer-secret',
     featureFlags: {
-        enableNewFeature: true,
-        enableExperimentalFeature: false,
+        enableNewFeature: process.env.REACT_APP_ENABLE_NEW_FEATURE === 'true' || true,
+        enableExperimentalFeature: process.env.REACT_APP_ENABLE_EXPERIMENTAL_FEATURE === 'true' || false,
     },
 };

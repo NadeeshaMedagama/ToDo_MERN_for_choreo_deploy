@@ -1,10 +1,9 @@
 import axios from 'axios';
 import { Todo, CreateTodoData, UpdateTodoData, ApiResponse } from '../types/todo';
-
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+import apiUrl from '../apiConfig';
 
 const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: apiUrl,
   headers: {
     'Content-Type': 'application/json',
   },
