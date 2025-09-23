@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { fetchAccessToken } from './auth';
 
-const API_BASE_URL = window.configs?.apiUrl || 'http://localhost:5000/api';
+const API_BASE_URL = window.config?.apiUrl || 'http://localhost:5000/api';
 
 // Create axios instance with base configuration
 const api = axios.create({
@@ -11,21 +10,8 @@ const api = axios.create({
   },
 });
 
-// Add request interceptor to include auth token
-api.interceptors.request.use(
-  async (config) => {
-    try {
-      const accessToken = await fetchAccessToken();
-      config.headers.Authorization = `Bearer ${accessToken}`;
-    } catch (error) {
-      console.error('Failed to get access token:', error);
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+// For local development, we don't need OAuth
+// The backend is configured to allow all origins in development mode
 
 export const todoApi = {
   // Get all todos
